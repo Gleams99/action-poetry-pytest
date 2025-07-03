@@ -22,4 +22,4 @@ runs:
   using: docker
   image: alpine:3.10
   args:
-    echo "At the beep it will be..."
+    - echo "At the beep it will be..."
