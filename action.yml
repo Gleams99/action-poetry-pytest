@@ -6,6 +6,7 @@ inputs:
     description: The name of the env to run against e.g. test
     required: true
     type: string
+    defaault: local
 
   qe-platform-tag:
     description: The tag of the qe-platform image to pull and run
@@ -17,6 +18,7 @@ inputs:
     description: The pytest arguments to execute
     required: false
     type: string
+    default: tests
 
 runs:
   using: composite
@@ -32,6 +34,7 @@ runs:
       uses: addnab/docker-run-action@v3
       with:
         image: python:3.14.0b3-bullseye
-        options: -e ABC=123 -e INPUTS_QE_PLATFORM_TAG=${{ inputs.qe-platform-tag }} -e ABX=124
+        options: -e INPUTS_TARGET_ENV=${{ inputs.target-env }} -e INPUTS_QE_PLATFORM_TAG=${{ inputs.qe-platform-tag }} -e INPUTS_PYTEST_ARGUMENTS=${{ inputs.pytest-arguments }}
         run: |
-          python3 -c "import os;print(f\"{os.getenv('INPUTS_QE_PLATFORM_TAG')=}\")"
+          python3 -c "import os;print(f\"poetry run pytest --target-env={os.getenv('INPUTS_TARGET_ENV')} --qe-platform-tag={os.getenv('INPUTS_QE_PLATFORM_TAG')} {os.getenv('INPUTS_PYTEST_ARGUMENTS')} \")" 
+          
