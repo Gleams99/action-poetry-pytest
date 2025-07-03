@@ -19,7 +19,17 @@ inputs:
     type: string
 
 runs:
-  using: docker
-  image: docker://alpine:3.10
-  args:
-    - /bin/sh -c ls -al
+  using: composite
+  steps:
+    - name: Show Inputs Message
+      shell: bash
+      run: |
+        echo "The followwinig inputs have been provided:"
+        echo "  target-env: ${{ inputs.target-env }}"
+        echo "  qe-platform-tag: ${{ inputs.qe-platform-tag }}"
+        echo "  pytest-arguments: ${{ inputs.pytest-arguments }}"
+    - name: Run Pytest
+      uses: addnab/docker-run-action@v3
+      with:
+        image: python:3.14.0b3-bullseye
+        run: python3 --version    
