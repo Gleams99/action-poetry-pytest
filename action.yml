@@ -19,7 +19,8 @@ inputs:
     type: string
 
 runs:
-  using: composite
+  using: docker
+  image: duffn/python-poetry:3.9.18-slim-1.6.1-2023-10-06
   steps:
     - name: Show Inputs Message
       shell: bash
