@@ -1,0 +1,30 @@
+description: Github action to run pytest via poetry
+name: Run pytest tests from poetry
+
+inputs:
+  target-env:
+    description: The name of the env to run against e.g. test
+    required: true
+    type: string
+
+  qe-platform-tag:
+    description: The tag of the qe-platform image to pull and run
+    required: false
+    default: main
+    type: string
+
+  pytest-arguments:
+    description: The pytest arguments to execute
+    required: false
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Show Inputs Message
+      shell: bash
+      run: |
+        echo "The followwinig inputs have been provided:"
+        echo "  target-env: ${{ inputs.target-env }}"
+        echo "  qe-platform-tag: ${{ inputs.qe-platform-tag }}"
+        echo "  pytest-arguments: ${{ inputs.pytest-arguments }}"
