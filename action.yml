@@ -32,4 +32,7 @@ runs:
       uses: addnab/docker-run-action@v3
       with:
         image: python:3.14.0b3-bullseye
-        run: python3 --version    
+        options: -e INPUTS_QE_PLATFORM_TAG=${{ inputs.qe-platform-tag }}
+        run: |
+          python3 --version
+          python3 -c "import os;print(f\"{os.getenv('INPUTS_QE_PLATFORM_TAG')=}\")"
