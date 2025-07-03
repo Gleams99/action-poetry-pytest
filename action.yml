@@ -22,4 +22,4 @@ runs:
   using: docker
   image: docker://alpine:3.10
   args:
-    - ls -al
+    - /bin/sh -c ls -al
