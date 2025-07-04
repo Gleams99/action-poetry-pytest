@@ -26,7 +26,7 @@ runs:
     - name: Show Inputs Message
       shell: bash
       run: |
-        echo "The followwinig inputs have been provided:"
+        echo "The following inputs have been provided:"
         echo "  target-env: ${{ inputs.target-env }}"
         echo "  qe-platform-tag: ${{ inputs.qe-platform-tag }}"
         echo "  pytest-arguments: ${{ inputs.pytest-arguments }}"
@@ -36,5 +36,5 @@ runs:
         image: python:3.14.0b3-bullseye
         options: -e INPUTS_TARGET_ENV="${{ inputs.target-env }}" -e INPUTS_QE_PLATFORM_TAG="${{ inputs.qe-platform-tag }}"
         run: |
-          python3 -c "import os;print(f\"poetry run pytest --target-env={os.getenv('INPUTS_TARGET_ENV')} --qe-platform-tag={os.getenv('INPUTS_QE_PLATFORM_TAG')}\"  + ${{ inputs.pytest-arguments }} + ")" 
+          python3 -c "import os;print(f\"poetry run pytest --target-env={os.getenv('INPUTS_TARGET_ENV')} --qe-platform-tag={os.getenv('INPUTS_QE_PLATFORM_TAG')}\"  + \" + ${{ inputs.pytest-arguments }} + "\")" 
           
