@@ -36,5 +36,5 @@ runs:
         image: python:3.14.0b3-bullseye
         options: -e INPUTS_TARGET_ENV="${{ inputs.target-env }}" -e INPUTS_QE_PLATFORM_TAG="${{ inputs.qe-platform-tag }}"
         run: |
-          python3 -c "import os;import shlex;run_args=\"--target-env=\\\"{os.getenv('INPUTS_TARGET_ENV', 'un kn own')}\\\"\";print(run_args)"
+          python3 -c "import os;import shlex;run_args=f\"--target-env=\\\"{os.getenv('INPUTS_TARGET_ENV', 'un kn own')}\\\"\";print(run_args)"
           
