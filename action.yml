@@ -36,5 +36,5 @@ runs:
         image: python:3.14.0b3-bullseye
         options: -e INPUTS_TARGET_ENV="${{ inputs.target-env }}" -e INPUTS_QE_PLATFORM_TAG="${{ inputs.qe-platform-tag }}"
         run: |
-          python3 -c "import os;run_args=f\"--target-env={os.getenv('INPUTS_TARGET_ENV', 'unknown')}\";print(f\"poetry run pytest {run_args}\")"
+          python3 -c "import os;run_args=f\"--target-env={os.getenv('INPUTS_TARGET_ENV', 'unknown')} ${{ inputs.pytest-arguments }}\";print(f\"poetry run pytest {run_args}\")"
           
